@@ -60,3 +60,5 @@ target/
 *.sqlite
 
 \.idea/
+
+save_pid.txt
