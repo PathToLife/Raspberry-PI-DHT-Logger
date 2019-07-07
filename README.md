@@ -1,5 +1,6 @@
 # Raspberry PI DHT Logger
 
+Just another little project by PathToLife.
 Logs temperature and humidty every few seconds and runs a server to show a pretty graph over time.
 
 ![server-page-image](screenshots/webpage.png)
