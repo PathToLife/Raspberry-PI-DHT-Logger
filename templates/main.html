@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TempMonitor</title>
+    <script src="plotly-latest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+        <div>{{ sys_info }}</div>
+        <div id="temp-humid-graph" style="width:100%;height:400px;"></div>
+        <div id="cpu-graph" style="width:100%;height:400px;"></div>
+
+        <div>Temp: {{ temp_str }}</div>
+        <div>Humid: {{ humid_str }}</div>
+        <div>Time: {{ time_str }}</div>
+        <div>{{ cpu_str }}</div>
+        <div>{{ current_page_views }}</div>
+<script>
+    var th_elem = document.getElementById('temp-humid-graph');
+    var th_data = [
+        {
+            x: {{ temp_x | safe }},
+            y: {{ temp_y | safe }},
+            name:'Temperature',
+            type: 'scatter'
+        },
+        {
+            x: {{ humid_x | safe }},
+            y: {{ humid_y | safe }},
+            name:'Humidity',
+            type: 'scatter',
+            yaxis: 'y2'
+        }
+    ];
+    var th_layout = {
+        title: 'Temp Humidity Apt',
+        yaxis: {
+            title: 'Celsius °C',
+            titlefont: {color: '#1f77b4'},
+            tickfont: {color: '#1f77b4'}
+        },
+        yaxis2: {
+            title: 'Humid %',
+            titlefont: {color: '#ff7f0e'},
+            tickfont: {color: '#ff7f0e'},
+            overlaying: 'y',
+            side: 'right'
+        }
+    };
+    Plotly.plot(th_elem, th_data, th_layout);
+
+    var cp_elem = document.getElementById('cpu-graph');
+    var cp_data = [{x: {{cpu_x | safe}}, y: {{ cpu_y | safe }} }];
+    var cp_layout = {
+        title: 'CPU',
+    };
+    Plotly.plot(cp_elem, cp_data, cp_layout);
+
+</script>
+</body>
+</html>
