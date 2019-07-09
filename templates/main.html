@@ -51,7 +51,12 @@
     Plotly.plot(th_elem, th_data, th_layout);
 
     var cp_elem = document.getElementById('cpu-graph');
-    var cp_data = [{x: {{cpu_x | safe}}, y: {{ cpu_y | safe }} }];
+    var cp_data = [
+        {
+            x: {{ cpu_x | safe }},
+            y: {{ cpu_y | safe }}
+        }
+        ];
     var cp_layout = {
         title: 'CPU',
     };

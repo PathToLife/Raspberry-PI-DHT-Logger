@@ -1,7 +1,14 @@
-import Adafruit_DHT
+try:
+    import Adafruit_DHT
+except ImportError:
+    Adafruit_DHT = None
 
 
 def get_temp(pin=17):
+
+    if Adafruit_DHT is None:
+        return -1, -1
+
     sensor = Adafruit_DHT.DHT22
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     humidity = round(humidity, 5)
