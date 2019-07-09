@@ -53,9 +53,13 @@ def get_cpu():
 @cron.scheduled_job(trigger='interval', seconds=12, max_instances=1)
 def get_data():
     global stats
-    stats.humid, stats.temp = temp_device.get_temp(17)
+    humid, temp = temp_device.get_temp(17)
 
-    stats_db.record_dht(stats.temp, stats.humid)
+    stats.add_humid(humid)
+    stats.add_temp(temp)
+
+    stats_db.record_dht(temp, humid)
+
     stats.cpu_percent = get_cpu()
     stats_db.record_cpu(stats.cpu_percent)
 
